@@ -1,0 +1,122 @@
+<!-- v1/templates/home.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Strona Główna</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Nawigacja -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Inteligentny Dom</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Przełącznik nawigacji">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Strona Główna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="lighting/control-light/">Oświetlenie</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="shutters/panel/">Rolety</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="acces/cards/">Kontrola Dostępu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="alarm/toggle/">Alarm</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-sm nav-link">Wyloguj</button>
+                        </form>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Zaloguj</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Główna zawartość -->
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4">Witamy na stronie głównej</h1>
+            <p class="lead">Zarządzaj swoim inteligentnym domem za pomocą poniższych sekcji.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-lightbulb-fill display-4 text-warning"></i>
+                        <h5 class="card-title mt-3">Oświetlenie</h5>
+                        <p class="card-text">Steruj oświetleniem w domu.</p>
+                        <a href="lighting/control-light/" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-window-dock display-4 text-secondary"></i>
+                        <h5 class="card-title mt-3">Rolety</h5>
+                        <p class="card-text">Zarządzaj roletami w swoim domu.</p>
+                        <a href="shutters/panel/" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-door-closed-fill display-4 text-success"></i>
+                        <h5 class="card-title mt-3">Kontrola Dostępu</h5>
+                        <p class="card-text">Zarządzaj kartami dostępu.</p>
+                        <a href="acces/cards/" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card text-center h-100 shadow-sm">
+                    <div class="card-body">
+                        <i class="bi bi-shield-lock-fill display-4 text-danger"></i>
+                        <h5 class="card-title mt-3">Alarm</h5>
+                        <p class="card-text">Steruj systemem alarmowym.</p>
+                        <a href="alarm/toggle/" class="btn btn-primary">Przejdź</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (zależności Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
